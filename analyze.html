@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Analyze Threat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h2>Cyber AI</h2>
+
+        <a href="/">Dashboard</a>
+        <a href="/analyze">Analyze Threat</a>
+        <a href="/history">Threat History</a>
+        <a href="/analytics">Analytics</a>
+        <a href="/about">About</a>
+    </div>
+
+    <div class="main">
+
+        <h1>Analyze Threat</h1>
+<h3>Upload Log File</h3>
+
+<form action="/upload_log" method="POST" enctype="multipart/form-data">
+
+    <input type="file" name="log_file" accept=".txt" required>
+
+    <button type="submit">
+        Upload & Scan
+    </button>
+
+</form>
+
+<br>
+<hr><br>
+        <form method="POST">
+
+            <textarea name="log_text" rows="10" placeholder="Paste log here..." required></textarea>
+
+            <br><br>
+
+            <button type="submit">
+                Analyze
+            </button>
+
+        </form>
+{% if result %}
+
+<div class="result">
+
+    <h3>Detection Result</h3>
+
+    {% if result.threat_level == "CRITICAL" %}
+    <span class="critical">CRITICAL</span>
+
+    {% elif result.threat_level == "HIGH" %}
+    <span class="high">HIGH</span>
+
+    {% else %}
+    <span class="low">LOW</span>
+    {% endif %}
+
+    <br><br>
+
+    <p><b>Threat Level:</b> {{ result.threat_level }}</p>
+
+    <p><b>Threat Type:</b> {{ result.threat_type }}</p>
+
+    <p><b>Failed Attempts:</b> {{ result.failed_attempts }}</p>
+
+    <p><b>IP Address:</b> {{ result.suspicious_ip }}</p>
+
+    <p><b>Confidence Score:</b> {{ result.confidence_score }}%</p>
+
+    <hr>
+
+    <h4>AI Explanation</h4>
+
+    <p>{{ result.ai_explanation }}</p>
+
+    <br>
+
+    <h4>AI Recommendation</h4>
+
+    <p>{{ result.ai_recommendation }}</p>
+
+</div>
+
+{% endif %}
+
+    </div>
+
+</body>
+
+</html>

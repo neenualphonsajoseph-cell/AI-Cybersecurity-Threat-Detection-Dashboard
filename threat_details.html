@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Threat Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h2>Cyber AI</h2>
+
+        <a href="/">Dashboard</a>
+        <a href="/analyze">Analyze Threat</a>
+        <a href="/history">Threat History</a>
+        <a href="/analytics">Analytics</a>
+        <a href="/about">About</a>
+    </div>
+
+    <div class="main">
+
+        <h1>Threat Details</h1>
+
+        <div class="result">
+
+<p><b>Timestamp:</b> {{ threat[1] }}</p>
+<p><b>Threat Level:</b> {{ threat[2] }}</p>
+<p><b>Threat Type:</b> {{ threat[3] }}</p>
+<p><b>Failed Attempts:</b> {{ threat[4] }}</p>
+<p><b>IP Address:</b> {{ threat[5] }}</p>
+<p><b>Confidence Score:</b> {{ threat[7] }}%</p>
+
+<hr>
+
+<h3>Original Log</h3>
+<pre>{{ threat[6] }}</pre>
+
+<hr>
+
+<h3>AI Explanation</h3>
+<p>{{ threat[8] }}</p>
+
+<h3>AI Recommendation</h3>
+<p>{{ threat[9] }}</p>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

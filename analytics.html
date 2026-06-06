@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Analytics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h2>Cyber AI</h2>
+
+        <a href="/">Dashboard</a>
+        <a href="/analyze">Analyze Threat</a>
+        <a href="/history">Threat History</a>
+        <a href="/analytics">Analytics</a>
+        <a href="/about">About</a>
+    </div>
+
+    <div class="main">
+    
+        <h1>Threat Analytics</h1>
+    
+        <div class="cards">
+    
+            <div class="card">
+                <h2>{{ total }}</h2>
+                <p>Total Threats</p>
+            </div>
+    
+            <div class="card">
+                <h2>{{ high }}</h2>
+                <p>High Threats</p>
+            </div>
+    
+            <div class="card">
+                <h2>{{ critical }}</h2>
+                <p>Critical Threats</p>
+            </div>
+    
+            <div class="card">
+                <h2>{{ low }}</h2>
+                <p>Low Threats</p>
+            </div>
+    
+        </div>
+    
+        <div class="charts-row">
+        
+            <div class="chart-container">
+                <canvas id="threatChart"></canvas>
+            </div>
+        
+            <div class="chart-container">
+                <canvas id="barChart"></canvas>
+            </div>
+        
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        const ctx = document.getElementById('threatChart').getContext('2d');
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Critical', 'High', 'Low'],
+                datasets: [{
+                    label: 'Threats',
+                    data: [{{ critical }}, {{ high }}, {{ low }}]
+            }]
+        },
+            options: {
+            responsive: true
+        }
+    });
+
+
+            const barCtx = document.getElementById('barChart');
+
+            new Chart(barCtx, {
+                type: 'bar',
+            data: {
+                labels: ['Critical', 'High', 'Low'],
+            datasets: [{
+                label: 'Threat Count',
+            data: [
+            {{ critical }},
+            {{ high }},
+            {{ low }}
+            ]
+        }]
+    },
+            options: {
+                responsive: true,
+            scales: {
+                y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+log,severity
+"User logged in successfully",LOW
+"System running normally",LOW
+"Application started successfully",LOW
+"Failed password for root from 192.168.1.20",HIGH
+"Multiple failed login attempts detected",HIGH
+"Unauthorized access attempt detected",HIGH
+"Trojan malware found in system",CRITICAL
+"Malware detected in downloaded file",CRITICAL
+"Ransomware activity detected",CRITICAL
+"Normal user activity",LOW
+"Failed password for admin",HIGH
+"Virus detected in workstation",CRITICAL
+"Successful authentication",LOW
+"Unauthorized privilege escalation",HIGH
+"Malicious executable detected",CRITICAL
+"Failed password for admin from 10.0.0.1",HIGH
+"Failed password for root from 192.168.0.10",HIGH
+"Multiple authentication failures detected",HIGH
+"Brute force login attempt detected",HIGH
+"Trojan malware found in workstation",CRITICAL
+"Ransomware activity detected",CRITICAL
+"Virus signature matched",CRITICAL
+"Malicious executable downloaded",CRITICAL
+"User logged in successfully",LOW
+"System startup completed",LOW
+"Backup completed successfully",LOW
+"Application running normally",LOW

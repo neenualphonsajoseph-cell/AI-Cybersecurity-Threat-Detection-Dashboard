@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cyber AI Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h2>Cyber AI</h2>
+
+        <a href="/">Dashboard</a>
+        <a href="/analyze">Analyze Threat</a>
+        <a href="/history">Threat History</a>
+        <a href="/analytics">Analytics</a>
+        <a href="/about">About</a>
+    </div>
+
+    <div class="main">
+
+        <h1>Cybersecurity Threat Detection Dashboard</h1>
+        {% if critical_alert %}
+        <div class="alert-banner">
+            🚨 CRITICAL THREAT DETECTED - Immediate Investigation Required
+        </div>
+        {% endif %}
+        <a href="/download_report" class="download-btn">
+            ⬇ Download Threat Report
+        </a>
+
+        <div class="cards">
+
+            <div class="card">
+                <h2>{{ total_threats }}</h2>
+                <p>Total Threats</p>
+            </div>
+
+            <div class="card">
+                <h2>{{ high_risk }}</h2>
+                <p>High Risk Threats</p>
+            </div>
+
+        </div>
+
+        <h2>Recent Threats</h2>
+
+        <table>
+
+            <tr>
+                <th>Timestamp</th>
+                <th>Threat Level</th>
+                <th>Threat Type</th>
+                <th>IP</th>
+            </tr>
+
+            {% for threat in recent_threats %}
+
+<tr>
+    <td>{{ threat[1] }}</td>
+
+    <td>
+        {% if threat[2] == "CRITICAL" %}
+        <span class="critical">CRITICAL</span>
+
+        {% elif threat[2] == "HIGH" %}
+        <span class="high">HIGH</span>
+
+        {% else %}
+        <span class="low">LOW</span>
+        {% endif %}
+    </td>
+
+    <td>{{ threat[3] }}</td>
+
+    <td>{{ threat[5] }}</td>
+</tr>
+
+{% endfor %}{% for threat in recent_threats %}
+
+<tr>
+    <td>{{ threat[1] }}</td>
+
+    <td>
+        {% if threat[2] == "CRITICAL" %}
+        <span class="critical">CRITICAL</span>
+
+        {% elif threat[2] == "HIGH" %}
+        <span class="high">HIGH</span>
+
+        {% else %}
+        <span class="low">LOW</span>
+        {% endif %}
+    </td>
+
+    <td>{{ threat[3] }}</td>
+
+    <td>{{ threat[5] }}</td>
+</tr>
+
+{% endfor %}
+
+        </table>
+
+    </div>
+
+</body>
+
+</html>

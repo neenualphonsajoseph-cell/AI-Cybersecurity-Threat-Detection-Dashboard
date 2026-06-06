@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Threat History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h2>Cyber AI</h2>
+
+        <a href="/">Dashboard</a>
+        <a href="/analyze">Analyze Threat</a>
+        <a href="/history">Threat History</a>
+        <a href="/analytics">Analytics</a>
+        <a href="/about">About</a>
+    </div>
+
+    <div class="main">
+
+        <h1>Threat History</h1>
+<form method="GET">
+
+    <input type="text" name="search" placeholder="Search Threats..." value="{{ search }}" class="search-box">
+
+    <button type="submit">
+        Search
+    </button>
+
+</form>
+
+<br>
+        <table>
+
+            <tr>
+                <th>Timestamp</th>
+                <th>Threat Level</th>
+                <th>Threat Type</th>
+                <th>Failed Attempts</th>
+                <th>IP Address</th>
+                <th>Action</th>
+            </tr>
+{% for threat in threats %}
+
+<tr>
+    <td>{{ threat[1] }}</td>
+
+    <td>
+        {% if threat[2] == "CRITICAL" %}
+        <span class="critical">CRITICAL</span>
+
+        {% elif threat[2] == "HIGH" %}
+        <span class="high">HIGH</span>
+
+        {% else %}
+        <span class="low">LOW</span>
+        {% endif %}
+    </td>
+
+    <td>{{ threat[3] }}</td>
+    <td>{{ threat[4] }}</td>
+    <td>{{ threat[5] }}</td>
+    <td>
+        <a href="/threat/{{ threat[0] }}" class="details-btn">
+            View Details
+        </a>
+    </td>
+</tr>
+
+{% endfor %}
+
+        </table>
+
+    </div>
+
+</body>
+
+</html>
